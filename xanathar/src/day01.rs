@@ -1,15 +1,18 @@
 use crate::utils;
 use std::iter::Iterator;
 
-
 pub fn test1() {
     let lines = utils::read_lines("data/day1.txt");
 
-    let sum = lines.map(|l| {
-        let first_digit = l.chars().filter(|c| c.is_numeric()).map(|c| (c as u8) - b'0').next().unwrap();
-        let last_digit = l.chars().filter(|c| c.is_numeric()).map(|c| (c as u8) - b'0').last().unwrap();
-        (first_digit * 10 + last_digit) as u64
-    }).sum::<u64>();
+    let sum = lines
+        .map(|l| {
+            let first_digit =
+                l.chars().filter(|c| c.is_numeric()).map(|c| (c as u8) - b'0').next().unwrap();
+            let last_digit =
+                l.chars().filter(|c| c.is_numeric()).map(|c| (c as u8) - b'0').last().unwrap();
+            (first_digit * 10 + last_digit) as u64
+        })
+        .sum::<u64>();
 
     println!("{sum}");
 }
@@ -22,7 +25,7 @@ pub fn test2() {
 }
 
 fn digit_at(s: &str) -> Option<u64> {
-    if s.len() == 0 {
+    if s.is_empty() {
         return None;
     }
 

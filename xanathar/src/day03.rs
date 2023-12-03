@@ -77,18 +77,18 @@ fn load() -> Vec<Number> {
                 while let Cell::Digit(v, adj, gear) = map[(xx, y)] {
                     val += v * exp;
                     exp *= 10;
-
-                    if xx == 0 {
-                        break;
-                    }
-                    xx -= 1;
                     adjacent |= adj;
                     geared = match (geared, gear) {
                         (None, v) => v,
                         (Some(_), None) => geared,
                         (Some(p1), Some(p2)) if p1 == p2 => geared,
                         (Some(p1), Some(p2)) => panic!("num at {x},{y} is double geared? ({p1:?} -- {p2:?})"),
+                    };
+
+                    if xx == 0 {
+                        break;
                     }
+                    xx -= 1;
                 }
 
                 numbers.push(Number { val, geared, adjacent });

@@ -8,3 +8,4 @@ authors = ["xanathar"]
 regex = "1"
 lazy_static = "1.4"
 bidivec = "0.1.0"
+num = "0.4.1"

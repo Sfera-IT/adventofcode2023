@@ -85,7 +85,7 @@ pub fn test1() {
 
 pub fn test2() {
     let lines: VecDeque<_> = utils::read_lines("data/day8.txt").collect();
-    let (dirs, places, mut positions) = read_data(lines);
+    let (dirs, places, positions) = read_data(lines);
 
     // This is the kind of aoc problem that I HATE, with passion.
     // The "solution" is not a solver algorithm but a kludge based

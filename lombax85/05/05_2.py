@@ -76,11 +76,16 @@ class Converter():
             if seed_to > highest_rule:
                 start_point = max(seed_from, highest_rule + 1)
                 new_rule_ranges.append([start_point, seed_to, 0])
+            
+            # if no rule applies to the range, add the range back
+            if (len(new_rule_ranges) == 0):
+                new_rule_ranges.append([seed_from, seed_to, 0])
 
         # apply rules and execute operations
         ret = []
         for new_rule in new_rule_ranges:
             ret.append([new_rule[0]+new_rule[2], new_rule[1]+new_rule[2], 0])
+    
 
         return ret
 

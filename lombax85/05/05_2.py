@@ -50,12 +50,16 @@ class Converter():
             # example seed pair is (50,60) and rule (55,65,+10), after this we have (50,55), (60,65), (55,60)+10
             # then the rules (operation +-) are applied and the final result is 3 new pairs: (50,55), (60,65), (65,70)
             for rule in self.rules_parsed:
+                # rule is fully contained in the seed
                 if rule[0] >= seed_from and rule[1] <= seed_to:
                     new_rule_ranges.append([rule[0], rule[1], rule[2]])
+                # rule starts inside the seed. And ends inside (min() is rule[1]) or outside (min() is seed_to)
                 elif (rule[0] >= seed_from and rule[0] < seed_to) and rule[1] > seed_to:
-                     new_rule_ranges.append([rule[0], seed_to, rule[2]])
+                     new_rule_ranges.append([rule[0], min(seed_to, rule[1]), rule[2]])
+                # rule starts outside the seed. And ends inside (min() is rule[1]) or outside (min() is seed_to)
                 elif rule[0] < seed_from and rule[1] >= seed_from:
                     new_rule_ranges.append([seed_from, min(rule[1], seed_to), rule[2]])
+                # seed is fully container in the rule
                 elif rule[0] < seed_from and rule[1] > seed_to:
                     new_rule_ranges.append([seed_from, seed_to, rule[2]])
 

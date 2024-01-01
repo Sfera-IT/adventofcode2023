@@ -17,7 +17,6 @@ distances = list(filter(lambda x: x != '', lines[1].split('Distance:')[1].split(
 # returns the total distance travelled in mm
 def race(button_msec, race_msec):
     if button_msec > race_msec:
-    
         return 0
     
     speed = button_msec
@@ -87,6 +86,19 @@ distance_to_beat = int(''.join(distances))
 last_distance = sys.maxsize
 
 print(f'Solution 2 is: {race2(race_time, distance_to_beat)}')
+
+import time
+current_time = time.time()
+
+cnt = 0
+for i in range(1,race_time):
+    d = race(i, race_time)
+    if (d > distance_to_beat):
+        cnt += 1
+
+last_time = time.time()
+print(f'Solution 2 bruteforce is: {cnt}')
+print(f'Time: {(last_time - current_time)} sec')
 
 
 
